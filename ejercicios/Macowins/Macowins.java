@@ -4,7 +4,7 @@ public class Prenda{
 	private double precioBase;
 	private Estado estado;
 
-	public Double precioFinal(){
+	public double precioFinal(){
 		return estado.precio(precioBase);
 	}
 }
@@ -14,7 +14,7 @@ public enum TipoPrenda{
 }
 
 public interface Estado{
-	public Double precio(Double precioBase);
+	public double precio(Double precioBase);
 }
 
 public class Nueva implements Estado{
@@ -53,13 +53,17 @@ public abstract class Venta{
 	private List<Item> items;
 	private LocalDateTime fecha;
 
-	public doube precioFinal(){
+	public double precioFinal(){
 		double importeTotal = items.sum(item -> item.precioIte());
 
 		return this.importeConRecargo(importeTotal);
 	}
 
 	public abstract double importeConRecargo(double importeTotal);
+
+	public boolean seVendioEnLaFecha(LocalDateTime fechaBuscada){
+		return this.fecha.equals(fechaBuscada);
+	}
 }
 
 public class VentaEfectivo extends Venta{
@@ -77,7 +81,7 @@ public class VentaTarjeta extends Venta{
 	@Override
 	public double importeConRecargo(double importeTotal){
 		return importeTotal + (cantidadDeCuotas * coeficienteFijo + (0.01 * importeTotal));
-	}	
+	}
 }
 
 public class Macowins{
@@ -88,7 +92,7 @@ public class Macowins{
 	}
 
 	public List<Venta> ventasDelDia(LocalDateTime fecha){
-		return ventas.filter(venta -> venta.seVendioEnLaFecha(fecha));
+		return this.ventas.filter(venta -> venta.seVendioEnLaFecha(fecha));
 	}
 
 	public double gananciaDelDia(LocalDateTime fecha){
