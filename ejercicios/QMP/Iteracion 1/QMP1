@@ -1,0 +1,66 @@
+public class Prenda{
+	private Tipo tipo;
+	private Material material;
+	private String colorPrimario;
+	private String colorSecundario;
+
+	public Prenda(Tipo tipo, Material material, String colorPrimario, String colorSecundario){
+		if(tipo == null){
+			throw new CaracteristicaDePrendaFaltanteException("La prenda no se puede crear sin tipo");
+		}
+		if(material == null){
+			throw new CaracteristicaDePrendaFaltanteException("La prenda no se puede crear sin material");
+		}
+		if(colorPrimario == null){
+			throw new CaracteristicaDePrendaFaltanteException("La prenda no se puede crear sin color primario");
+		}
+		this.categoria = categoria;
+		this.material = material;
+		this.colorPrimario = colorPrimario
+		this.colorSecundario = colorSecundario;
+	}
+
+	public void setColorSecundario(String colorSecundario){
+		this.colorSecundario = colorSecundario;
+	}
+}
+
+public enum Material{
+	JEAN, LANA, ALGODON, CUERO, 
+}
+
+public enum Tipo{
+	REMERA(Categoria.PARTE_SUPERIOR),
+	BUZO(Categoria.PARTE_SUPERIOR),
+	BLUSA(Categoria.PARTE_SUPERIOR),
+	CAMPERA(Categoria.PARTE_SUPERIOR),
+	MUSCULOSA(Categoria.PARTE_SUPERIOR),
+	PANTALON(Categoria.PARTE_INFERIOR),
+	BERMUDA(Categoria.PARTE_INFERIOR),
+	SHORT(Categoria.PARTE_INFERIOR),
+	POLLERA(Categoria.PARTE_INFERIOR),
+	ZAPATOS(Categoria.CALZADO),
+	ZAPATILLAS(Categoria.CALZADO),
+	SANDALIAS(Categoria.CALZADO),
+	OJOTAS(Categoria.CALZADO),
+	GORRA(Categoria.ACCESORIO),
+	GORRO(Categoria.ACCESORIO),
+	PAÑUELO(Categoria.ACCESORIO),
+	SOMBRERO(Categoria.ACCESORIO);
+
+	private Categoria categoria;
+
+	public Tipo(Categoria categoria){
+		if (categoria == null) {
+			throw new CaracteristicaDePrendaFaltanteException("La prenda no se puede crear sin categoria");
+		}
+		this.categoria = categoria;
+	}
+}
+
+public enum Categoria{
+	PARTE_SUPERIOR,
+	PARTE_INFERIOR,
+	CALZADO,
+	ACCESORIO;
+}
